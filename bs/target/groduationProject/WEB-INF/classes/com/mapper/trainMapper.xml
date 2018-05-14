@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.trainMapper">
+  <resultMap id="BaseResultMap" type="com.entiy.train">
+    <id column="t_id" jdbcType="INTEGER" property="tId" />
+    <result column="e_id" jdbcType="INTEGER" property="eId" />
+    <result column="t_agency" jdbcType="VARCHAR" property="tAgency" />
+    <result column="t_stime" jdbcType="DATE" property="tStime" />
+    <result column="t_etime" jdbcType="DATE" property="tEtime" />
+    <result column="t_certificate" jdbcType="VARCHAR" property="tCertificate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    t_id, e_id, t_agency, t_stime, t_etime, t_certificate
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from train
+    where t_id = #{tId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from train
+    where t_id = #{tId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.entiy.train">
+    insert into train (t_id, e_id, t_agency, 
+      t_stime, t_etime, t_certificate
+      )
+    values (#{tId,jdbcType=INTEGER}, #{eId,jdbcType=INTEGER}, #{tAgency,jdbcType=VARCHAR}, 
+      #{tStime,jdbcType=DATE}, #{tEtime,jdbcType=DATE}, #{tCertificate,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.entiy.train">
+    insert into train
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="tId != null">
+        t_id,
+      </if>
+      <if test="eId != null">
+        e_id,
+      </if>
+      <if test="tAgency != null">
+        t_agency,
+      </if>
+      <if test="tStime != null">
+        t_stime,
+      </if>
+      <if test="tEtime != null">
+        t_etime,
+      </if>
+      <if test="tCertificate != null">
+        t_certificate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="tId != null">
+        #{tId,jdbcType=INTEGER},
+      </if>
+      <if test="eId != null">
+        #{eId,jdbcType=INTEGER},
+      </if>
+      <if test="tAgency != null">
+        #{tAgency,jdbcType=VARCHAR},
+      </if>
+      <if test="tStime != null">
+        #{tStime,jdbcType=DATE},
+      </if>
+      <if test="tEtime != null">
+        #{tEtime,jdbcType=DATE},
+      </if>
+      <if test="tCertificate != null">
+        #{tCertificate,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.entiy.train">
+    update train
+    <set>
+      <if test="eId != null">
+        e_id = #{eId,jdbcType=INTEGER},
+      </if>
+      <if test="tAgency != null">
+        t_agency = #{tAgency,jdbcType=VARCHAR},
+      </if>
+      <if test="tStime != null">
+        t_stime = #{tStime,jdbcType=DATE},
+      </if>
+      <if test="tEtime != null">
+        t_etime = #{tEtime,jdbcType=DATE},
+      </if>
+      <if test="tCertificate != null">
+        t_certificate = #{tCertificate,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where t_id = #{tId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.entiy.train">
+    update train
+    set e_id = #{eId,jdbcType=INTEGER},
+      t_agency = #{tAgency,jdbcType=VARCHAR},
+      t_stime = #{tStime,jdbcType=DATE},
+      t_etime = #{tEtime,jdbcType=DATE},
+      t_certificate = #{tCertificate,jdbcType=VARCHAR}
+    where t_id = #{tId,jdbcType=INTEGER}
+  </update>
+</mapper>

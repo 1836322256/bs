@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.administratorMapper">
+  <resultMap id="BaseResultMap" type="com.entiy.administrator">
+    <id column="a_id" jdbcType="INTEGER" property="aId" />
+    <result column="a_password" jdbcType="VARCHAR" property="aPassword" />
+    <result column="permission" jdbcType="VARCHAR" property="permission" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    a_id, a_password, permission
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from administrator
+    where a_id = #{aId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from administrator
+    where a_id = #{aId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.entiy.administrator">
+    insert into administrator (a_id, a_password, permission
+      )
+    values (#{aId,jdbcType=INTEGER}, #{aPassword,jdbcType=VARCHAR}, #{permission,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.entiy.administrator">
+    insert into administrator
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="aId != null">
+        a_id,
+      </if>
+      <if test="aPassword != null">
+        a_password,
+      </if>
+      <if test="permission != null">
+        permission,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="aId != null">
+        #{aId,jdbcType=INTEGER},
+      </if>
+      <if test="aPassword != null">
+        #{aPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="permission != null">
+        #{permission,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.entiy.administrator">
+    update administrator
+    <set>
+      <if test="aPassword != null">
+        a_password = #{aPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="permission != null">
+        permission = #{permission,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where a_id = #{aId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.entiy.administrator">
+    update administrator
+    set a_password = #{aPassword,jdbcType=VARCHAR},
+      permission = #{permission,jdbcType=VARCHAR}
+    where a_id = #{aId,jdbcType=INTEGER}
+  </update>
+</mapper>

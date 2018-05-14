@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.postskillMapper">
+  <resultMap id="BaseResultMap" type="com.entiy.postskill">
+    <id column="p_id" jdbcType="INTEGER" property="pId" />
+    <result column="e_id" jdbcType="INTEGER" property="eId" />
+    <result column="p_specialty" jdbcType="VARCHAR" property="pSpecialty" />
+    <result column="p_cet" jdbcType="VARCHAR" property="pCet" />
+    <result column="p_skill" jdbcType="VARCHAR" property="pSkill" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    p_id, e_id, p_specialty, p_cet, p_skill
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from postskill
+    where p_id = #{pId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from postskill
+    where p_id = #{pId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.entiy.postskill">
+    insert into postskill (p_id, e_id, p_specialty, 
+      p_cet, p_skill)
+    values (#{pId,jdbcType=INTEGER}, #{eId,jdbcType=INTEGER}, #{pSpecialty,jdbcType=VARCHAR}, 
+      #{pCet,jdbcType=VARCHAR}, #{pSkill,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.entiy.postskill">
+    insert into postskill
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="pId != null">
+        p_id,
+      </if>
+      <if test="eId != null">
+        e_id,
+      </if>
+      <if test="pSpecialty != null">
+        p_specialty,
+      </if>
+      <if test="pCet != null">
+        p_cet,
+      </if>
+      <if test="pSkill != null">
+        p_skill,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="pId != null">
+        #{pId,jdbcType=INTEGER},
+      </if>
+      <if test="eId != null">
+        #{eId,jdbcType=INTEGER},
+      </if>
+      <if test="pSpecialty != null">
+        #{pSpecialty,jdbcType=VARCHAR},
+      </if>
+      <if test="pCet != null">
+        #{pCet,jdbcType=VARCHAR},
+      </if>
+      <if test="pSkill != null">
+        #{pSkill,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.entiy.postskill">
+    update postskill
+    <set>
+      <if test="eId != null">
+        e_id = #{eId,jdbcType=INTEGER},
+      </if>
+      <if test="pSpecialty != null">
+        p_specialty = #{pSpecialty,jdbcType=VARCHAR},
+      </if>
+      <if test="pCet != null">
+        p_cet = #{pCet,jdbcType=VARCHAR},
+      </if>
+      <if test="pSkill != null">
+        p_skill = #{pSkill,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where p_id = #{pId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.entiy.postskill">
+    update postskill
+    set e_id = #{eId,jdbcType=INTEGER},
+      p_specialty = #{pSpecialty,jdbcType=VARCHAR},
+      p_cet = #{pCet,jdbcType=VARCHAR},
+      p_skill = #{pSkill,jdbcType=VARCHAR}
+    where p_id = #{pId,jdbcType=INTEGER}
+  </update>
+</mapper>

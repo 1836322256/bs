@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.missionMapper">
+  <resultMap id="BaseResultMap" type="com.entiy.mission">
+    <id column="m_id" jdbcType="INTEGER" property="mId" />
+    <result column="e_id" jdbcType="INTEGER" property="eId" />
+    <result column="m_name" jdbcType="VARCHAR" property="mName" />
+    <result column="m_person" jdbcType="VARCHAR" property="mPerson" />
+    <result column="m_etc" jdbcType="DATE" property="mEtc" />
+    <result column="m_commit" jdbcType="DATE" property="mCommit" />
+    <result column="m_status" jdbcType="VARCHAR" property="mStatus" />
+    <result column="m_mark" jdbcType="VARCHAR" property="mMark" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    m_id, e_id, m_name, m_person, m_etc, m_commit, m_status, m_mark
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from mission
+    where m_id = #{mId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from mission
+    where m_id = #{mId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.entiy.mission">
+    insert into mission (m_id, e_id, m_name, 
+      m_person, m_etc, m_commit, m_status, 
+      m_mark)
+    values (#{mId,jdbcType=INTEGER}, #{eId,jdbcType=INTEGER}, #{mName,jdbcType=VARCHAR}, 
+      #{mPerson,jdbcType=VARCHAR}, #{mEtc,jdbcType=DATE}, #{mCommit,jdbcType=DATE}, #{mStatus,jdbcType=VARCHAR}, 
+      #{mMark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.entiy.mission">
+    insert into mission
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="mId != null">
+        m_id,
+      </if>
+      <if test="eId != null">
+        e_id,
+      </if>
+      <if test="mName != null">
+        m_name,
+      </if>
+      <if test="mPerson != null">
+        m_person,
+      </if>
+      <if test="mEtc != null">
+        m_etc,
+      </if>
+      <if test="mCommit != null">
+        m_commit,
+      </if>
+      <if test="mStatus != null">
+        m_status,
+      </if>
+      <if test="mMark != null">
+        m_mark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="mId != null">
+        #{mId,jdbcType=INTEGER},
+      </if>
+      <if test="eId != null">
+        #{eId,jdbcType=INTEGER},
+      </if>
+      <if test="mName != null">
+        #{mName,jdbcType=VARCHAR},
+      </if>
+      <if test="mPerson != null">
+        #{mPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="mEtc != null">
+        #{mEtc,jdbcType=DATE},
+      </if>
+      <if test="mCommit != null">
+        #{mCommit,jdbcType=DATE},
+      </if>
+      <if test="mStatus != null">
+        #{mStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="mMark != null">
+        #{mMark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.entiy.mission">
+    update mission
+    <set>
+      <if test="eId != null">
+        e_id = #{eId,jdbcType=INTEGER},
+      </if>
+      <if test="mName != null">
+        m_name = #{mName,jdbcType=VARCHAR},
+      </if>
+      <if test="mPerson != null">
+        m_person = #{mPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="mEtc != null">
+        m_etc = #{mEtc,jdbcType=DATE},
+      </if>
+      <if test="mCommit != null">
+        m_commit = #{mCommit,jdbcType=DATE},
+      </if>
+      <if test="mStatus != null">
+        m_status = #{mStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="mMark != null">
+        m_mark = #{mMark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where m_id = #{mId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.entiy.mission">
+    update mission
+    set e_id = #{eId,jdbcType=INTEGER},
+      m_name = #{mName,jdbcType=VARCHAR},
+      m_person = #{mPerson,jdbcType=VARCHAR},
+      m_etc = #{mEtc,jdbcType=DATE},
+      m_commit = #{mCommit,jdbcType=DATE},
+      m_status = #{mStatus,jdbcType=VARCHAR},
+      m_mark = #{mMark,jdbcType=VARCHAR}
+    where m_id = #{mId,jdbcType=INTEGER}
+  </update>
+</mapper>

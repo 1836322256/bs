@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.workMapper">
+  <resultMap id="BaseResultMap" type="com.entiy.work">
+    <id column="w_id" jdbcType="INTEGER" property="wId" />
+    <result column="e_id" jdbcType="INTEGER" property="eId" />
+    <result column="w_unit" jdbcType="VARCHAR" property="wUnit" />
+    <result column="w_type" jdbcType="VARCHAR" property="wType" />
+    <result column="w_stime" jdbcType="DATE" property="wStime" />
+    <result column="w_etime" jdbcType="DATE" property="wEtime" />
+    <result column="w_position" jdbcType="VARCHAR" property="wPosition" />
+    <result column="w_name" jdbcType="VARCHAR" property="wName" />
+    <result column="w_mark" jdbcType="VARCHAR" property="wMark" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    w_id, e_id, w_unit, w_type, w_stime, w_etime, w_position, w_name, w_mark
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from work
+    where w_id = #{wId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from work
+    where w_id = #{wId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.entiy.work">
+    insert into work (w_id, e_id, w_unit, 
+      w_type, w_stime, w_etime, w_position, 
+      w_name, w_mark)
+    values (#{wId,jdbcType=INTEGER}, #{eId,jdbcType=INTEGER}, #{wUnit,jdbcType=VARCHAR}, 
+      #{wType,jdbcType=VARCHAR}, #{wStime,jdbcType=DATE}, #{wEtime,jdbcType=DATE}, #{wPosition,jdbcType=VARCHAR}, 
+      #{wName,jdbcType=VARCHAR}, #{wMark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.entiy.work">
+    insert into work
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="wId != null">
+        w_id,
+      </if>
+      <if test="eId != null">
+        e_id,
+      </if>
+      <if test="wUnit != null">
+        w_unit,
+      </if>
+      <if test="wType != null">
+        w_type,
+      </if>
+      <if test="wStime != null">
+        w_stime,
+      </if>
+      <if test="wEtime != null">
+        w_etime,
+      </if>
+      <if test="wPosition != null">
+        w_position,
+      </if>
+      <if test="wName != null">
+        w_name,
+      </if>
+      <if test="wMark != null">
+        w_mark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="wId != null">
+        #{wId,jdbcType=INTEGER},
+      </if>
+      <if test="eId != null">
+        #{eId,jdbcType=INTEGER},
+      </if>
+      <if test="wUnit != null">
+        #{wUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="wType != null">
+        #{wType,jdbcType=VARCHAR},
+      </if>
+      <if test="wStime != null">
+        #{wStime,jdbcType=DATE},
+      </if>
+      <if test="wEtime != null">
+        #{wEtime,jdbcType=DATE},
+      </if>
+      <if test="wPosition != null">
+        #{wPosition,jdbcType=VARCHAR},
+      </if>
+      <if test="wName != null">
+        #{wName,jdbcType=VARCHAR},
+      </if>
+      <if test="wMark != null">
+        #{wMark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.entiy.work">
+    update work
+    <set>
+      <if test="eId != null">
+        e_id = #{eId,jdbcType=INTEGER},
+      </if>
+      <if test="wUnit != null">
+        w_unit = #{wUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="wType != null">
+        w_type = #{wType,jdbcType=VARCHAR},
+      </if>
+      <if test="wStime != null">
+        w_stime = #{wStime,jdbcType=DATE},
+      </if>
+      <if test="wEtime != null">
+        w_etime = #{wEtime,jdbcType=DATE},
+      </if>
+      <if test="wPosition != null">
+        w_position = #{wPosition,jdbcType=VARCHAR},
+      </if>
+      <if test="wName != null">
+        w_name = #{wName,jdbcType=VARCHAR},
+      </if>
+      <if test="wMark != null">
+        w_mark = #{wMark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where w_id = #{wId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.entiy.work">
+    update work
+    set e_id = #{eId,jdbcType=INTEGER},
+      w_unit = #{wUnit,jdbcType=VARCHAR},
+      w_type = #{wType,jdbcType=VARCHAR},
+      w_stime = #{wStime,jdbcType=DATE},
+      w_etime = #{wEtime,jdbcType=DATE},
+      w_position = #{wPosition,jdbcType=VARCHAR},
+      w_name = #{wName,jdbcType=VARCHAR},
+      w_mark = #{wMark,jdbcType=VARCHAR}
+    where w_id = #{wId,jdbcType=INTEGER}
+  </update>
+</mapper>

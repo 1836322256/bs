@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.educationMapper">
+  <resultMap id="BaseResultMap" type="com.entiy.education">
+    <id column="ed_id" jdbcType="INTEGER" property="edId" />
+    <result column="e_id" jdbcType="INTEGER" property="eId" />
+    <result column="ed_school" jdbcType="VARCHAR" property="edSchool" />
+    <result column="ed_major" jdbcType="VARCHAR" property="edMajor" />
+    <result column="ed_degree" jdbcType="VARCHAR" property="edDegree" />
+    <result column="ed_stime" jdbcType="DATE" property="edStime" />
+    <result column="ed_etime" jdbcType="DATE" property="edEtime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ed_id, e_id, ed_school, ed_major, ed_degree, ed_stime, ed_etime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from education
+    where ed_id = #{edId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from education
+    where ed_id = #{edId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.entiy.education">
+    insert into education (ed_id, e_id, ed_school, 
+      ed_major, ed_degree, ed_stime, 
+      ed_etime)
+    values (#{edId,jdbcType=INTEGER}, #{eId,jdbcType=INTEGER}, #{edSchool,jdbcType=VARCHAR}, 
+      #{edMajor,jdbcType=VARCHAR}, #{edDegree,jdbcType=VARCHAR}, #{edStime,jdbcType=DATE}, 
+      #{edEtime,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.entiy.education">
+    insert into education
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="edId != null">
+        ed_id,
+      </if>
+      <if test="eId != null">
+        e_id,
+      </if>
+      <if test="edSchool != null">
+        ed_school,
+      </if>
+      <if test="edMajor != null">
+        ed_major,
+      </if>
+      <if test="edDegree != null">
+        ed_degree,
+      </if>
+      <if test="edStime != null">
+        ed_stime,
+      </if>
+      <if test="edEtime != null">
+        ed_etime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="edId != null">
+        #{edId,jdbcType=INTEGER},
+      </if>
+      <if test="eId != null">
+        #{eId,jdbcType=INTEGER},
+      </if>
+      <if test="edSchool != null">
+        #{edSchool,jdbcType=VARCHAR},
+      </if>
+      <if test="edMajor != null">
+        #{edMajor,jdbcType=VARCHAR},
+      </if>
+      <if test="edDegree != null">
+        #{edDegree,jdbcType=VARCHAR},
+      </if>
+      <if test="edStime != null">
+        #{edStime,jdbcType=DATE},
+      </if>
+      <if test="edEtime != null">
+        #{edEtime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.entiy.education">
+    update education
+    <set>
+      <if test="eId != null">
+        e_id = #{eId,jdbcType=INTEGER},
+      </if>
+      <if test="edSchool != null">
+        ed_school = #{edSchool,jdbcType=VARCHAR},
+      </if>
+      <if test="edMajor != null">
+        ed_major = #{edMajor,jdbcType=VARCHAR},
+      </if>
+      <if test="edDegree != null">
+        ed_degree = #{edDegree,jdbcType=VARCHAR},
+      </if>
+      <if test="edStime != null">
+        ed_stime = #{edStime,jdbcType=DATE},
+      </if>
+      <if test="edEtime != null">
+        ed_etime = #{edEtime,jdbcType=DATE},
+      </if>
+    </set>
+    where ed_id = #{edId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.entiy.education">
+    update education
+    set e_id = #{eId,jdbcType=INTEGER},
+      ed_school = #{edSchool,jdbcType=VARCHAR},
+      ed_major = #{edMajor,jdbcType=VARCHAR},
+      ed_degree = #{edDegree,jdbcType=VARCHAR},
+      ed_stime = #{edStime,jdbcType=DATE},
+      ed_etime = #{edEtime,jdbcType=DATE}
+    where ed_id = #{edId,jdbcType=INTEGER}
+  </update>
+</mapper>

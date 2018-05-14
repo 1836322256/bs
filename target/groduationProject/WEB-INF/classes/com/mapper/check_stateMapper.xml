@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.check_stateMapper">
+  <resultMap id="BaseResultMap" type="com.entiy.check_state">
+    <id column="c_id" jdbcType="BIGINT" property="cId" />
+    <result column="e_id" jdbcType="INTEGER" property="eId" />
+    <result column="c_attendance" jdbcType="VARCHAR" property="cAttendance" />
+    <result column="c_time" jdbcType="DATE" property="cTime" />
+    <result column="c_overwork" jdbcType="INTEGER" property="cOverwork" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    c_id, e_id, c_attendance, c_time, c_overwork
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from check_state
+    where c_id = #{cId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from check_state
+    where c_id = #{cId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.entiy.check_state">
+    insert into check_state (c_id, e_id, c_attendance, 
+      c_time, c_overwork)
+    values (#{cId,jdbcType=BIGINT}, #{eId,jdbcType=INTEGER}, #{cAttendance,jdbcType=VARCHAR}, 
+      #{cTime,jdbcType=DATE}, #{cOverwork,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.entiy.check_state">
+    insert into check_state
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="cId != null">
+        c_id,
+      </if>
+      <if test="eId != null">
+        e_id,
+      </if>
+      <if test="cAttendance != null">
+        c_attendance,
+      </if>
+      <if test="cTime != null">
+        c_time,
+      </if>
+      <if test="cOverwork != null">
+        c_overwork,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="cId != null">
+        #{cId,jdbcType=BIGINT},
+      </if>
+      <if test="eId != null">
+        #{eId,jdbcType=INTEGER},
+      </if>
+      <if test="cAttendance != null">
+        #{cAttendance,jdbcType=VARCHAR},
+      </if>
+      <if test="cTime != null">
+        #{cTime,jdbcType=DATE},
+      </if>
+      <if test="cOverwork != null">
+        #{cOverwork,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.entiy.check_state">
+    update check_state
+    <set>
+      <if test="eId != null">
+        e_id = #{eId,jdbcType=INTEGER},
+      </if>
+      <if test="cAttendance != null">
+        c_attendance = #{cAttendance,jdbcType=VARCHAR},
+      </if>
+      <if test="cTime != null">
+        c_time = #{cTime,jdbcType=DATE},
+      </if>
+      <if test="cOverwork != null">
+        c_overwork = #{cOverwork,jdbcType=INTEGER},
+      </if>
+    </set>
+    where c_id = #{cId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.entiy.check_state">
+    update check_state
+    set e_id = #{eId,jdbcType=INTEGER},
+      c_attendance = #{cAttendance,jdbcType=VARCHAR},
+      c_time = #{cTime,jdbcType=DATE},
+      c_overwork = #{cOverwork,jdbcType=INTEGER}
+    where c_id = #{cId,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.awardMapper">
+  <resultMap id="BaseResultMap" type="com.entiy.award">
+    <id column="aw_id" jdbcType="INTEGER" property="awId" />
+    <result column="e_id" jdbcType="INTEGER" property="eId" />
+    <result column="aw_name" jdbcType="VARCHAR" property="awName" />
+    <result column="aw_type" jdbcType="VARCHAR" property="awType" />
+    <result column="aw_time" jdbcType="DATE" property="awTime" />
+    <result column="aw_mark" jdbcType="VARCHAR" property="awMark" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    aw_id, e_id, aw_name, aw_type, aw_time, aw_mark
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from award
+    where aw_id = #{awId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from award
+    where aw_id = #{awId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.entiy.award">
+    insert into award (aw_id, e_id, aw_name, 
+      aw_type, aw_time, aw_mark
+      )
+    values (#{awId,jdbcType=INTEGER}, #{eId,jdbcType=INTEGER}, #{awName,jdbcType=VARCHAR}, 
+      #{awType,jdbcType=VARCHAR}, #{awTime,jdbcType=DATE}, #{awMark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.entiy.award">
+    insert into award
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="awId != null">
+        aw_id,
+      </if>
+      <if test="eId != null">
+        e_id,
+      </if>
+      <if test="awName != null">
+        aw_name,
+      </if>
+      <if test="awType != null">
+        aw_type,
+      </if>
+      <if test="awTime != null">
+        aw_time,
+      </if>
+      <if test="awMark != null">
+        aw_mark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="awId != null">
+        #{awId,jdbcType=INTEGER},
+      </if>
+      <if test="eId != null">
+        #{eId,jdbcType=INTEGER},
+      </if>
+      <if test="awName != null">
+        #{awName,jdbcType=VARCHAR},
+      </if>
+      <if test="awType != null">
+        #{awType,jdbcType=VARCHAR},
+      </if>
+      <if test="awTime != null">
+        #{awTime,jdbcType=DATE},
+      </if>
+      <if test="awMark != null">
+        #{awMark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.entiy.award">
+    update award
+    <set>
+      <if test="eId != null">
+        e_id = #{eId,jdbcType=INTEGER},
+      </if>
+      <if test="awName != null">
+        aw_name = #{awName,jdbcType=VARCHAR},
+      </if>
+      <if test="awType != null">
+        aw_type = #{awType,jdbcType=VARCHAR},
+      </if>
+      <if test="awTime != null">
+        aw_time = #{awTime,jdbcType=DATE},
+      </if>
+      <if test="awMark != null">
+        aw_mark = #{awMark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where aw_id = #{awId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.entiy.award">
+    update award
+    set e_id = #{eId,jdbcType=INTEGER},
+      aw_name = #{awName,jdbcType=VARCHAR},
+      aw_type = #{awType,jdbcType=VARCHAR},
+      aw_time = #{awTime,jdbcType=DATE},
+      aw_mark = #{awMark,jdbcType=VARCHAR}
+    where aw_id = #{awId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.employeeinfoMapper">
+  <resultMap id="BaseResultMap" type="com.entiy.employeeinfo">
+    <id column="e_id" jdbcType="INTEGER" property="eId" />
+    <result column="e_password" jdbcType="VARCHAR" property="ePassword" />
+    <result column="permission" jdbcType="VARCHAR" property="permission" />
+    <result column="e_hiredate" jdbcType="DATE" property="eHiredate" />
+    <result column="e_image" jdbcType="VARCHAR" property="eImage" />
+    <result column="e_gender" jdbcType="VARCHAR" property="eGender" />
+    <result column="e_nation" jdbcType="VARCHAR" property="eNation" />
+    <result column="e_native" jdbcType="VARCHAR" property="eNative" />
+    <result column="e_phone" jdbcType="INTEGER" property="ePhone" />
+    <result column="e_email" jdbcType="VARCHAR" property="eEmail" />
+    <result column="e_birth" jdbcType="DATE" property="eBirth" />
+    <result column="e_age" jdbcType="VARCHAR" property="eAge" />
+    <result column="e_department" jdbcType="VARCHAR" property="eDepartment" />
+    <result column="e_card" jdbcType="INTEGER" property="eCard" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    e_id, e_password, permission, e_hiredate, e_image, e_gender, e_nation, e_native, 
+    e_phone, e_email, e_birth, e_age, e_department, e_card
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from employeeinfo
+    where e_id = #{eId,jdbcType=INTEGER}
+  </select>
+  <!--用户密码账户验证-->
+  <select id="login" parameterType="com.entiy.employeeinfo" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from employeeinfo
+    where e_id = #{eId,jdbcType=INTEGER}  AND  e_password = #{ePassword,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from employeeinfo
+    where e_id = #{eId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.entiy.employeeinfo">
+    insert into employeeinfo (e_id, e_password, permission, 
+      e_hiredate, e_image, e_gender, 
+      e_nation, e_native, e_phone, 
+      e_email, e_birth, e_age, 
+      e_department, e_card)
+    values (#{eId,jdbcType=INTEGER}, #{ePassword,jdbcType=VARCHAR}, #{permission,jdbcType=VARCHAR}, 
+      #{eHiredate,jdbcType=DATE}, #{eImage,jdbcType=VARCHAR}, #{eGender,jdbcType=VARCHAR}, 
+      #{eNation,jdbcType=VARCHAR}, #{eNative,jdbcType=VARCHAR}, #{ePhone,jdbcType=INTEGER}, 
+      #{eEmail,jdbcType=VARCHAR}, #{eBirth,jdbcType=DATE}, #{eAge,jdbcType=VARCHAR}, 
+      #{eDepartment,jdbcType=VARCHAR}, #{eCard,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.entiy.employeeinfo">
+    insert into employeeinfo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="eId != null">
+        e_id,
+      </if>
+      <if test="ePassword != null">
+        e_password,
+      </if>
+      <if test="permission != null">
+        permission,
+      </if>
+      <if test="eHiredate != null">
+        e_hiredate,
+      </if>
+      <if test="eImage != null">
+        e_image,
+      </if>
+      <if test="eGender != null">
+        e_gender,
+      </if>
+      <if test="eNation != null">
+        e_nation,
+      </if>
+      <if test="eNative != null">
+        e_native,
+      </if>
+      <if test="ePhone != null">
+        e_phone,
+      </if>
+      <if test="eEmail != null">
+        e_email,
+      </if>
+      <if test="eBirth != null">
+        e_birth,
+      </if>
+      <if test="eAge != null">
+        e_age,
+      </if>
+      <if test="eDepartment != null">
+        e_department,
+      </if>
+      <if test="eCard != null">
+        e_card,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="eId != null">
+        #{eId,jdbcType=INTEGER},
+      </if>
+      <if test="ePassword != null">
+        #{ePassword,jdbcType=VARCHAR},
+      </if>
+      <if test="permission != null">
+        #{permission,jdbcType=VARCHAR},
+      </if>
+      <if test="eHiredate != null">
+        #{eHiredate,jdbcType=DATE},
+      </if>
+      <if test="eImage != null">
+        #{eImage,jdbcType=VARCHAR},
+      </if>
+      <if test="eGender != null">
+        #{eGender,jdbcType=VARCHAR},
+      </if>
+      <if test="eNation != null">
+        #{eNation,jdbcType=VARCHAR},
+      </if>
+      <if test="eNative != null">
+        #{eNative,jdbcType=VARCHAR},
+      </if>
+      <if test="ePhone != null">
+        #{ePhone,jdbcType=INTEGER},
+      </if>
+      <if test="eEmail != null">
+        #{eEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="eBirth != null">
+        #{eBirth,jdbcType=DATE},
+      </if>
+      <if test="eAge != null">
+        #{eAge,jdbcType=VARCHAR},
+      </if>
+      <if test="eDepartment != null">
+        #{eDepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="eCard != null">
+        #{eCard,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.entiy.employeeinfo">
+    update employeeinfo
+    <set>
+      <if test="ePassword != null">
+        e_password = #{ePassword,jdbcType=VARCHAR},
+      </if>
+      <if test="permission != null">
+        permission = #{permission,jdbcType=VARCHAR},
+      </if>
+      <if test="eHiredate != null">
+        e_hiredate = #{eHiredate,jdbcType=DATE},
+      </if>
+      <if test="eImage != null">
+        e_image = #{eImage,jdbcType=VARCHAR},
+      </if>
+      <if test="eGender != null">
+        e_gender = #{eGender,jdbcType=VARCHAR},
+      </if>
+      <if test="eNation != null">
+        e_nation = #{eNation,jdbcType=VARCHAR},
+      </if>
+      <if test="eNative != null">
+        e_native = #{eNative,jdbcType=VARCHAR},
+      </if>
+      <if test="ePhone != null">
+        e_phone = #{ePhone,jdbcType=INTEGER},
+      </if>
+      <if test="eEmail != null">
+        e_email = #{eEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="eBirth != null">
+        e_birth = #{eBirth,jdbcType=DATE},
+      </if>
+      <if test="eAge != null">
+        e_age = #{eAge,jdbcType=VARCHAR},
+      </if>
+      <if test="eDepartment != null">
+        e_department = #{eDepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="eCard != null">
+        e_card = #{eCard,jdbcType=INTEGER},
+      </if>
+    </set>
+    where e_id = #{eId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.entiy.employeeinfo">
+    update employeeinfo
+    set e_password = #{ePassword,jdbcType=VARCHAR},
+      permission = #{permission,jdbcType=VARCHAR},
+      e_hiredate = #{eHiredate,jdbcType=DATE},
+      e_image = #{eImage,jdbcType=VARCHAR},
+      e_gender = #{eGender,jdbcType=VARCHAR},
+      e_nation = #{eNation,jdbcType=VARCHAR},
+      e_native = #{eNative,jdbcType=VARCHAR},
+      e_phone = #{ePhone,jdbcType=INTEGER},
+      e_email = #{eEmail,jdbcType=VARCHAR},
+      e_birth = #{eBirth,jdbcType=DATE},
+      e_age = #{eAge,jdbcType=VARCHAR},
+      e_department = #{eDepartment,jdbcType=VARCHAR},
+      e_card = #{eCard,jdbcType=INTEGER}
+    where e_id = #{eId,jdbcType=INTEGER}
+  </update>
+</mapper>

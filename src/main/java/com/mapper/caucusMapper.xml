@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.caucusMapper">
+  <resultMap id="BaseResultMap" type="com.entiy.caucus">
+    <id column="c_id" jdbcType="INTEGER" property="cId" />
+    <result column="e_id" jdbcType="INTEGER" property="eId" />
+    <result column="c_political" jdbcType="VARCHAR" property="cPolitical" />
+    <result column="c_stime" jdbcType="DATE" property="cStime" />
+    <result column="c_mark" jdbcType="VARCHAR" property="cMark" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    c_id, e_id, c_political, c_stime, c_mark
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from caucus
+    where c_id = #{cId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from caucus
+    where c_id = #{cId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.entiy.caucus">
+    insert into caucus (c_id, e_id, c_political, 
+      c_stime, c_mark)
+    values (#{cId,jdbcType=INTEGER}, #{eId,jdbcType=INTEGER}, #{cPolitical,jdbcType=VARCHAR}, 
+      #{cStime,jdbcType=DATE}, #{cMark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.entiy.caucus">
+    insert into caucus
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="cId != null">
+        c_id,
+      </if>
+      <if test="eId != null">
+        e_id,
+      </if>
+      <if test="cPolitical != null">
+        c_political,
+      </if>
+      <if test="cStime != null">
+        c_stime,
+      </if>
+      <if test="cMark != null">
+        c_mark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="cId != null">
+        #{cId,jdbcType=INTEGER},
+      </if>
+      <if test="eId != null">
+        #{eId,jdbcType=INTEGER},
+      </if>
+      <if test="cPolitical != null">
+        #{cPolitical,jdbcType=VARCHAR},
+      </if>
+      <if test="cStime != null">
+        #{cStime,jdbcType=DATE},
+      </if>
+      <if test="cMark != null">
+        #{cMark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.entiy.caucus">
+    update caucus
+    <set>
+      <if test="eId != null">
+        e_id = #{eId,jdbcType=INTEGER},
+      </if>
+      <if test="cPolitical != null">
+        c_political = #{cPolitical,jdbcType=VARCHAR},
+      </if>
+      <if test="cStime != null">
+        c_stime = #{cStime,jdbcType=DATE},
+      </if>
+      <if test="cMark != null">
+        c_mark = #{cMark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where c_id = #{cId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.entiy.caucus">
+    update caucus
+    set e_id = #{eId,jdbcType=INTEGER},
+      c_political = #{cPolitical,jdbcType=VARCHAR},
+      c_stime = #{cStime,jdbcType=DATE},
+      c_mark = #{cMark,jdbcType=VARCHAR}
+    where c_id = #{cId,jdbcType=INTEGER}
+  </update>
+</mapper>
